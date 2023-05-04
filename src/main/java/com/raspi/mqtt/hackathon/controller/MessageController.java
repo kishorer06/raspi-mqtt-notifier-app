@@ -1,13 +1,11 @@
 package com.raspi.mqtt.hackathon.controller;
 
 import org.apache.camel.ProducerTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raspi.mqtt.hackathon.model.MessageEntity;
@@ -26,13 +24,13 @@ public class MessageController {
         this.producerTemplate = producerTemplate;
     }
 
-    @GetMapping("/message")
+    @GetMapping
     public ResponseEntity<MessageEntity> getMessage() {
         MessageEntity message = messageRepository.findTopByOrderByCreatedAtDesc();
         return ResponseEntity.ok(message);
     }
 
-    @PostMapping("/send-message")
+    @PostMapping
     public void sendMessage(@RequestBody String message) {
         producerTemplate.sendBody("mqtt:pub?publishTopicName=" + "AddDeviceTopic", message);
     }
