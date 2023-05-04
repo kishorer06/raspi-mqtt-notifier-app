@@ -34,4 +34,9 @@ public class MessageController {
     public void sendMessage(@RequestBody String message) {
         producerTemplate.sendBody("mqtt:pub?publishTopicName=" + "AddDeviceTopic", message);
     }
+
+    @PostMapping("/ignoreDevice")
+    public void ignoreDeviceMessage(@RequestBody String message) {
+        producerTemplate.sendBody("mqtt:pub?publishTopicName=" + "IgnoreDeviceTopic", message);
+    }
 }
