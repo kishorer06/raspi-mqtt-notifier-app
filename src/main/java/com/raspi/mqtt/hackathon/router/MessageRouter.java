@@ -15,6 +15,7 @@ public class MessageRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // Add Camel route to subscribe message from MQTT topic
-        from("mqtt:bar?subscribeTopicName=tom").process(messageProcessor).to("bean:messageService?method=storeMessage");
+        from("mqtt:sub?subscribeTopicName=RaspiNotificationTopic").process(messageProcessor)
+                .to("bean:messageService?method=storeMessage");
     }
 }
