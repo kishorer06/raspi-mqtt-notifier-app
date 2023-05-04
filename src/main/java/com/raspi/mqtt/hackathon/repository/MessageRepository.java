@@ -8,4 +8,5 @@ import com.raspi.mqtt.hackathon.model.MessageEntity;
 @Repository
 public interface MessageRepository extends JpaRepository<MessageEntity, Long> {
 
+    MessageEntity findTopByOrderByCreatedAtDesc();
 }
